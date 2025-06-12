@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Chat</title>
+</head>
+<body>
+  <h2>Computer: Hey</h2>
+  <form id="chatForm">
+    <label>Me:</label>
+    <input type="text" id="message" required />
+    <button type="submit">Send</button>
+  </form>
+  <p id="reply"></p>
+
+  <script>
+    document.getElementById('chatForm').onsubmit = async function(e) {
+      e.preventDefault();
+      const message = document.getElementById('message').value;
+      const response = await fetch('/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'message=' + encodeURIComponent(message)
+      });
+      const data = await response.json();
+      document.getElementById('reply').innerText = 'Reply: ' + data.reply;
+    }
+  </script>
+</body>
+</html>
