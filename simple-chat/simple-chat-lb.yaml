@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simplechat-app-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: simplechat-app
+  ports:
+  - protocol: TCP
+    port: 3000        # Internal cluster port
+    targetPort: 3000  # Port exposed by the container
+    #nodePort: 32000   

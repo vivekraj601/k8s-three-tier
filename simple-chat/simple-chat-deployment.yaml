@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simplechat-app
+  labels:
+    app: simplechat-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: simplechat-app
+  template:
+    metadata:
+      labels:
+        app: simplechat-app
+    spec:
+      containers:
+      - name: simplechat-app
+        image: threetierappregsistry.azurecr.io/simple-chat:latest
+        ports:
+        - containerPort: 3000
